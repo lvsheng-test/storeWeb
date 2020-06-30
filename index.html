@@ -1,300 +1,340 @@
-<!DOCTYPE html>
-<html lang="zh">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-<title>首页 - 光年(Light Year Admin)后台管理系统模板</title>
-<link rel="icon" href="favicon.ico" type="image/ico">
-<meta name="keywords" content="LightYear,光年,后台模板,后台管理系统,光年HTML模板">
-<meta name="description" content="LightYear是一个基于Bootstrap v3.3.7的后台管理系统的HTML模板。">
-<meta name="author" content="yinqi">
-<link href="css/bootstrap.min.css" rel="stylesheet">
-<link href="css/materialdesignicons.min.css" rel="stylesheet">
-<link href="css/style.min.css" rel="stylesheet">
-</head>
-  
-<body>
-<div class="lyear-layout-web">
-  <div class="lyear-layout-container">
-    <!--左侧导航-->
-    <aside class="lyear-layout-sidebar"></aside>
-    <!--End 左侧导航-->
-    
-    <!--头部信息-->
-    <header class="lyear-layout-header"></header>
-    <!--End 头部信息-->
-    
-    <!--页面主要内容-->
-    <main class="lyear-layout-content">
-      
-      <div class="container-fluid">
-        
-        <div class="row">
-          <div class="col-sm-6 col-lg-3">
-            <div class="card bg-primary">
-              <div class="card-body clearfix">
-                <div class="pull-right">
-                  <p class="h6 text-white m-t-0">今日收入</p>
-                  <p class="h3 text-white m-b-0">102,125.00</p>
-                </div>
-                <div class="pull-left"> <span class="img-avatar img-avatar-48 bg-translucent"><i class="mdi mdi-currency-cny fa-1-5x"></i></span> </div>
-              </div>
+<!doctype html>
+<html class="x-admin-sm">
+    <head>
+        <meta charset="UTF-8">
+        <title>森鲜便利店后台管理系统</title>
+        <meta name="renderer" content="webkit|ie-comp|ie-stand">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+        <meta http-equiv="Cache-Control" content="no-siteapp" />
+        <link rel="stylesheet" href="./css/font.css">
+        <link rel="stylesheet" href="./css/xadmin.css">
+        <!-- <link rel="stylesheet" href="./css/theme5.css"> -->
+        <script src="./lib/layui/layui.js" charset="utf-8"></script>
+        <script type="text/javascript" src="./js/xadmin.js"></script>
+        <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+        <!--[if lt IE 9]>
+          <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+          <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+        <script>
+            // 是否开启刷新记忆tab功能
+            // var is_remember = false;
+        </script>
+    </head>
+    <body class="index">
+        <!-- 顶部开始 -->
+        <div class="container">
+            <div class="logo">
+                <a href="./index.html">森鲜便利店</a></div>
+            <div class="left_open">
+                <a><i title="展开左侧栏" class="iconfont">&#xe699;</i></a>
             </div>
-          </div>
-          
-          <div class="col-sm-6 col-lg-3">
-            <div class="card bg-danger">
-              <div class="card-body clearfix">
-                <div class="pull-right">
-                  <p class="h6 text-white m-t-0">用户总数</p>
-                  <p class="h3 text-white m-b-0">920,000</p>
-                </div>
-                <div class="pull-left"> <span class="img-avatar img-avatar-48 bg-translucent"><i class="mdi mdi-account fa-1-5x"></i></span> </div>
-              </div>
-            </div>
-          </div>
-          
-          <div class="col-sm-6 col-lg-3">
-            <div class="card bg-success">
-              <div class="card-body clearfix">
-                <div class="pull-right">
-                  <p class="h6 text-white m-t-0">下载总量</p>
-                  <p class="h3 text-white m-b-0">34,005,000</p>
-                </div>
-                <div class="pull-left"> <span class="img-avatar img-avatar-48 bg-translucent"><i class="mdi mdi-arrow-down-bold fa-1-5x"></i></span> </div>
-              </div>
-            </div>
-          </div>
-          
-          <div class="col-sm-6 col-lg-3">
-            <div class="card bg-purple">
-              <div class="card-body clearfix">
-                <div class="pull-right">
-                  <p class="h6 text-white m-t-0">新增留言</p>
-                  <p class="h3 text-white m-b-0">153 条</p>
-                </div>
-                <div class="pull-left"> <span class="img-avatar img-avatar-48 bg-translucent"><i class="mdi mdi-comment-outline fa-1-5x"></i></span> </div>
-              </div>
-            </div>
-          </div>
+            
+            <ul class="layui-nav right" lay-filter="">
+                <li class="layui-nav-item">
+                    <a href="javascript:;">admin</a>
+                    <dl class="layui-nav-child">
+                        <!-- 二级菜单 -->
+                        <dd>
+                            <a onclick="xadmin.open('个人信息','http://www.baidu.com')">个人信息</a></dd>
+                        <dd>
+                            <a onclick="xadmin.open('切换帐号','http://www.baidu.com')">修改密码</a></dd>
+                        <dd>
+                            <a onclick="xadmin.open('切换帐号','http://www.baidu.com')">清空缓存</a></dd>    
+                        <dd>
+                            <a href="./login.html">退出登录</a></dd>
+                    </dl>
+                </li>
+                <!--<li class="layui-nav-item to-index">
+                    <a href="/">前台首页</a></li>-->
+            </ul>
         </div>
-        
-        <div class="row">
-          
-          <div class="col-lg-6"> 
-            <div class="card">
-              <div class="card-header">
-                <h4>每周用户</h4>
-              </div>
-              <div class="card-body">
-                <canvas class="js-chartjs-bars"></canvas>
-              </div>
+        <!-- 顶部结束 -->
+        <!-- 中部开始 -->
+        <!-- 左侧菜单开始 -->
+        <div class="left-nav">
+            <div id="side-nav">
+                <ul id="nav">
+                    <li>
+                        <a href="javascript:;">
+                            <i class="iconfont left-nav-li" lay-tips="会员管理">&#xe6b8;</i>
+                            <cite>会员管理</cite>
+                            <i class="iconfont nav_right">&#xe697;</i></a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a onclick="xadmin.add_tab('统计页面','welcome1.html')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>统计页面</cite></a>
+                            </li>
+                            <li>
+                                <a onclick="xadmin.add_tab('会员列表(静态表格)','member-list.html')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>会员列表(静态表格)</cite></a>
+                            </li>
+                            <li>
+                                <a onclick="xadmin.add_tab('会员列表(动态表格)','member-list1.html',true)">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>会员列表(动态表格)</cite></a>
+                            </li>
+                            <li>
+                                <a onclick="xadmin.add_tab('会员删除','member-del.html')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>会员删除</cite></a>
+                            </li>
+                            <li>
+                                <a href="javascript:;">
+                                    <i class="iconfont">&#xe70b;</i>
+                                    <cite>会员管理</cite>
+                                    <i class="iconfont nav_right">&#xe697;</i></a>
+                                <ul class="sub-menu">
+                                    <li>
+                                        <a onclick="xadmin.add_tab('会员删除','member-del.html')">
+                                            <i class="iconfont">&#xe6a7;</i>
+                                            <cite>会员删除</cite></a>
+                                    </li>
+                                    <li>
+                                        <a onclick="xadmin.add_tab('等级管理','member-list1.html')">
+                                            <i class="iconfont">&#xe6a7;</i>
+                                            <cite>等级管理</cite></a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:;">
+                            <i class="iconfont left-nav-li" lay-tips="订单管理">&#xe723;</i>
+                            <cite>订单管理</cite>
+                            <i class="iconfont nav_right">&#xe697;</i></a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a onclick="xadmin.add_tab('订单列表','order-list.html')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>订单列表</cite></a>
+                            </li>
+                            <li>
+                                <a onclick="xadmin.add_tab('订单列表1','order-list1.html')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>订单列表1</cite></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:;">
+                            <i class="iconfont left-nav-li" lay-tips="分类管理">&#xe723;</i>
+                            <cite>分类管理</cite>
+                            <i class="iconfont nav_right">&#xe697;</i></a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a onclick="xadmin.add_tab('多级分类','cate.html')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>多级分类</cite></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:;">
+                            <i class="iconfont left-nav-li" lay-tips="城市联动">&#xe723;</i>
+                            <cite>城市联动</cite>
+                            <i class="iconfont nav_right">&#xe697;</i></a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a onclick="xadmin.add_tab('三级地区联动','city.html')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>三级地区联动</cite></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:;">
+                            <i class="iconfont left-nav-li" lay-tips="管理员管理">&#xe726;</i>
+                            <cite>管理员管理</cite>
+                            <i class="iconfont nav_right">&#xe697;</i></a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a onclick="xadmin.add_tab('管理员列表','admin-list.html')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>管理员列表</cite></a>
+                            </li>
+                            <li>
+                                <a onclick="xadmin.add_tab('角色管理','admin-role.html')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>角色管理</cite></a>
+                            </li>
+                            <li>
+                                <a onclick="xadmin.add_tab('权限分类','admin-cate.html')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>权限分类</cite></a>
+                            </li>
+                            <li>
+                                <a onclick="xadmin.add_tab('权限管理','admin-rule.html')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>权限管理</cite></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:;">
+                            <i class="iconfont left-nav-li" lay-tips="系统统计">&#xe6ce;</i>
+                            <cite>系统统计</cite>
+                            <i class="iconfont nav_right">&#xe697;</i></a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a onclick="xadmin.add_tab('拆线图','echarts1.html')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>拆线图</cite></a>
+                            </li>
+                            <li>
+                                <a onclick="xadmin.add_tab('拆线图','echarts2.html')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>拆线图</cite></a>
+                            </li>
+                            <li>
+                                <a onclick="xadmin.add_tab('地图','echarts3.html')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>地图</cite></a>
+                            </li>
+                            <li>
+                                <a onclick="xadmin.add_tab('饼图','echarts4.html')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>饼图</cite></a>
+                            </li>
+                            <li>
+                                <a onclick="xadmin.add_tab('雷达图','echarts5.html')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>雷达图</cite></a>
+                            </li>
+                            <li>
+                                <a onclick="xadmin.add_tab('k线图','echarts6.html')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>k线图</cite></a>
+                            </li>
+                            <li>
+                                <a onclick="xadmin.add_tab('热力图','echarts7.html')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>热力图</cite></a>
+                            </li>
+                            <li>
+                                <a onclick="xadmin.add_tab('仪表图','echarts8.html')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>仪表图</cite></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:;">
+                            <i class="iconfont left-nav-li" lay-tips="图标字体">&#xe6b4;</i>
+                            <cite>图标字体</cite>
+                            <i class="iconfont nav_right">&#xe697;</i></a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a onclick="xadmin.add_tab('图标对应字体','unicode.html')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>图标对应字体</cite></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:;">
+                            <i class="iconfont left-nav-li" lay-tips="其它页面">&#xe6b4;</i>
+                            <cite>其它页面</cite>
+                            <i class="iconfont nav_right">&#xe697;</i></a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a href="login.html" target="_blank">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>登录页面</cite></a>
+                            </li>
+                            <li>
+                                <a onclick="xadmin.add_tab('错误页面','error.html')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>错误页面</cite></a>
+                            </li>
+                            <li>
+                                <a onclick="xadmin.add_tab('示例页面','demo.html')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>示例页面</cite></a>
+                            </li>
+                            <li>
+                                <a onclick="xadmin.add_tab('更新日志','log.html')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>更新日志</cite></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:;">
+                            <i class="iconfont left-nav-li" lay-tips="第三方组件">&#xe6b4;</i>
+                            <cite>layui第三方组件</cite>
+                            <i class="iconfont nav_right">&#xe697;</i></a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a onclick="xadmin.add_tab('滑块验证','https://fly.layui.com/extend/sliderVerify/')" target="">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>滑块验证</cite></a>
+                            </li>
+                            <li>
+                                <a onclick="xadmin.add_tab('富文本编辑器','https://fly.layui.com/extend/layedit/')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>富文本编辑器</cite></a>
+                            </li>
+                            <li>
+                                <a onclick="xadmin.add_tab('eleTree 树组件','https://fly.layui.com/extend/eleTree/')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>eleTree 树组件</cite></a>
+                            </li>
+                            <li>
+                                <a onclick="xadmin.add_tab('图片截取','https://fly.layui.com/extend/croppers/')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>图片截取</cite></a>
+                            </li>
+                            <li>
+                                <a onclick="xadmin.add_tab('formSelects 4.x 多选框','https://fly.layui.com/extend/formSelects/')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>formSelects 4.x 多选框</cite></a>
+                            </li>
+                            <li>
+                                <a onclick="xadmin.add_tab('Magnifier 放大镜','https://fly.layui.com/extend/Magnifier/')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>Magnifier 放大镜</cite></a>
+                            </li>
+                            <li>
+                                <a onclick="xadmin.add_tab('notice 通知控件','https://fly.layui.com/extend/notice/')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>notice 通知控件</cite></a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
-          </div>
-          
-          <div class="col-lg-6"> 
-            <div class="card">
-              <div class="card-header">
-                <h4>交易历史记录</h4>
-              </div>
-              <div class="card-body">
-                <canvas class="js-chartjs-lines"></canvas>
-              </div>
-            </div>
-          </div>
-           
         </div>
-        
-        <div class="row">
-          
-          <div class="col-lg-12">
-            <div class="card">
-              <div class="card-header">
-                <h4>项目信息</h4>
-              </div>
-              <div class="card-body">
-                <div class="table-responsive">
-                  <table class="table table-hover">
-                    <thead>
-                      <tr>
-                        <th>#</th>
-                        <th>项目名称</th>
-                        <th>开始日期</th>
-                        <th>截止日期</th>
-                        <th>状态</th>
-                        <th>进度</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>1</td>
-                        <td>设计新主题</td>
-                        <td>10/02/2019</td>
-                        <td>12/05/2019</td>
-                        <td><span class="label label-warning">待定</span></td>
-                        <td>
-                          <div class="progress progress-striped progress-sm">
-                            <div class="progress-bar progress-bar-warning" style="width: 45%;"></div>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>2</td>
-                        <td>网站重新设计</td>
-                        <td>01/03/2019</td>
-                       <td>12/04/2019</td>
-                        <td><span class="label label-success">进行中</span></td>
-                        <td>
-                          <div class="progress progress-striped progress-sm">
-                            <div class="progress-bar progress-bar-success" style="width: 30%;"></div>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>3</td>
-                        <td>模型设计</td>
-                         <td>10/10/2019</td>
-                         <td>12/11/2019</td>
-                        <td><span class="label label-warning">待定</span></td>
-                        <td>
-                          <div class="progress progress-striped progress-sm">
-                            <div class="progress-bar progress-bar-warning" style="width: 25%;"></div>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>4</td>
-                        <td>后台管理系统模板设计</td>
-                        <td>25/01/2019</td>
-                        <td>09/05/2019</td>
-                        <td><span class="label label-success">进行中</span></td>
-                        <td>
-                          <div class="progress progress-striped progress-sm">
-                            <div class="progress-bar progress-bar-success" style="width: 55%;"></div>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>5</td>
-                        <td>前端设计</td>
-                        <td>10/10/2019</td>
-                        <td>12/12/2019</td>
-                        <td><span class="label label-danger">未开始</span></td>
-                        <td>
-                          <div class="progress progress-striped progress-sm">
-                            <div class="progress-bar progress-bar-danger" style="width: 0%;"></div>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>6</td>
-                        <td>桌面软件测试</td>
-                        <td>10/01/2019</td>
-                        <td>29/03/2019</td>
-                        <td><span class="label label-success">进行中</span></td>
-                        <td>
-                          <div class="progress progress-striped progress-sm">
-                            <div class="progress-bar progress-bar-success" style="width: 75%;"></div>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>7</td>
-                        <td>APP改版开发</td>
-                        <td>25/02/2019</td>
-                        <td>12/05/2019</td>
-                        <td><span class="label label-danger">暂停</span></td>
-                        <td>
-                          <div class="progress progress-striped progress-sm">
-                            <div class="progress-bar progress-bar-danger" style="width: 15%;"></div>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>8</td>
-                        <td>Logo设计</td>
-                        <td>10/02/2019</td>
-                        <td>01/03/2019</td>
-                        <td><span class="label label-warning">完成</span></td>
-                        <td>
-                          <div class="progress progress-striped progress-sm">
-                            <div class="progress-bar progress-bar-success" style="width: 100%;"></div>
-                          </div>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
+        <!-- <div class="x-slide_left"></div> -->
+        <!-- 左侧菜单结束 -->
+        <!-- 右侧主体开始 -->
+        <div class="page-content">
+            <div class="layui-tab tab" lay-filter="xbs_tab" lay-allowclose="false">
+                <ul class="layui-tab-title">
+                    <li class="home">
+                        <i class="layui-icon">&#xe68e;</i>我的桌面</li></ul>
+                <div class="layui-unselect layui-form-select layui-form-selected" id="tab_right">
+                    <dl>
+                        <dd data-type="this">关闭当前</dd>
+                        <dd data-type="other">关闭其它</dd>
+                        <dd data-type="all">关闭全部</dd></dl>
                 </div>
-              </div>
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show">
+                        <iframe src='./welcome.html' frameborder="0" scrolling="yes" class="x-iframe"></iframe>
+                    </div>
+                </div>
+                <div id="tab_show"></div>
             </div>
-          </div>
-          
         </div>
+        <div class="page-content-bg"></div>
+        <style id="theme_style"></style>
+        <!-- 右侧主体结束 -->
         
-      </div>
-      
-    </main>
-    <!--End 页面主要内容-->
-  </div>
-</div>
+    </body>
 
-<script type="text/javascript" src="js/jquery.min.js"></script>
-<script type="text/javascript" src="js/bootstrap.min.js"></script>
-<script type="text/javascript" src="js/perfect-scrollbar.min.js"></script>
-<script type="text/javascript" src="js/main.min.js"></script>
-<script type="text/javascript" src="js/index.js"></script>
-
-<!--图表插件-->
-<script type="text/javascript" src="js/Chart.js"></script>
-<script type="text/javascript">
-$('.lyear-layout-sidebar').load('left.html',function(responseTxt,statusTxt,xhr){
-            console.log('responseTxt,statusTxt,xhr')
-});
-$('.lyear-layout-header').load('header.html',function(responseTxt,statusTxt,xhr){
-            console.log('responseTxt,statusTxt,xhr')
-});
-
-var $dashChartBarsCnt  = jQuery( '.js-chartjs-bars' )[0].getContext( '2d' ),
-        $dashChartLinesCnt = jQuery( '.js-chartjs-lines' )[0].getContext( '2d' );
-    
-    var $dashChartBarsData = {
-		labels: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
-		datasets: [
-			{
-				label: '注册用户',
-                borderWidth: 1,
-                borderColor: 'rgba(0,0,0,0)',
-				backgroundColor: 'rgba(51,202,185,0.5)',
-                hoverBackgroundColor: "rgba(51,202,185,0.7)",
-                hoverBorderColor: "rgba(0,0,0,0)",
-				data: [2500, 1500, 1200, 3200, 4800, 3500, 1500]
-			}
-		]
-	};
-    var $dashChartLinesData = {
-		labels: ['2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013', '2014'],
-		datasets: [
-			{
-				label: '交易资金',
-				data: [20, 25, 40, 30, 45, 40, 55, 40, 48, 40, 42, 50],
-				borderColor: '#358ed7',
-				backgroundColor: 'rgba(53, 142, 215, 0.175)',
-                borderWidth: 1,
-                fill: false,
-                lineTension: 0.5
-			}
-		]
-	};
-    
-    new Chart($dashChartBarsCnt, {
-        type: 'bar',
-        data: $dashChartBarsData
-    });
-    
-    var myLineChart = new Chart($dashChartLinesCnt, {
-        type: 'line',
-        data: $dashChartLinesData,
-    });
-</script>
-</body>
 </html>
