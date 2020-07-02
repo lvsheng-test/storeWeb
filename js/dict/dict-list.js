@@ -41,9 +41,9 @@ $(function(){
     });
         //获取下拉框值
         form.on('select(parent_code)',function(data){
+        	
         	console.log(data.value)
         	paranCode =data.value;
-        	/*sreachDictList(data.value,1);*/
         });
         
         /*form.on('submit(sreach)',function(data){
@@ -86,14 +86,43 @@ function member_del(obj, id) {
     function(index) {
         //发异步删除数据
         console.log("删除的ID:"+id)
-        
+        delDictInfo(id);
         $(obj).parents("tr").remove();
-        layer.msg('已删除!', {
-            icon: 1,
-            time: 1000
-        });
     });
 }
+
+function delDictInfo(dicId){
+	$.ajax({
+        url:URL+'/dict/deleteDictInfo',
+        contentType: "application/json;charset=UTF-8",
+        type:'POST',
+        dataType:'json',
+        data:JSON.stringify({id:dicId}),
+        success:function(data){
+            //请求成功后执行的代码
+            console.log(data);
+            var list = eval(data);//解析json  
+            if(list.code==200){//请求执行成功
+            	layer.msg('已删除!', {icon: 1,time: 1000});
+            }else{
+            	layer.open({
+				    type: 0,
+				    title:'错误提示',
+				    content: list.msg
+				});
+            }
+        },
+        error:function(data){
+            //失败后执行的代码
+            layer.open({
+				    type: 0,
+				    title:'错误提示',
+				    content: "请求数据失败!"
+			});
+        }
+	});
+}
+
 
 function delAll (argument) {
 var ids = [];
@@ -107,8 +136,8 @@ $('tbody input').each(function(index, el) {
   		layer.msg('请选择要删除的数据!', {icon: 7,time: 1000});
   	}else{
   		layer.confirm('确认要删除吗？',function(index){
+  			delDictInfo(ids.toString());
 	    	//捉到所有被选中的，发异步进行删除
-	    	layer.msg('删除成功', {icon: 1});
 	    	$(".layui-form-checked").not('.header').parents('tr').remove();
     	});
   	}
@@ -173,10 +202,7 @@ function setTbodyHtml(data,currentPage,pageTotal){
         str +="<td>"+dictinfo.parentCode+"</td>";
         str +="<td>"+getSmpFormatDateByLong(dictinfo.ts,false)+"</td>";
         str +="<td class=\"td-manage\">";
-        str +="<a title=\"查看\" onclick=\"xadmin.open('编辑','order-view.html')\" href=\"javascript:;\">";
-        str +="<i class=\"layui-icon\">&#xe63c;</i></a>";
-        str +="<a title=\"删除\" onclick=\"member_del(this,'"+dictinfo.id+"')\" href=\"javascript:;\">";
-        str +="<i class=\"layui-icon\">&#xe640;</i></a>";
+        str +="<span class=\"layui-btn layui-btn-danger layui-btn-mini\" onclick=\"member_del(this,'"+dictinfo.id+"')\">删除</span>";
         str +="</td>";
         str +="</tr>";
        
