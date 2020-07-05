@@ -1,58 +1,88 @@
 var URL='http://10.224.194.73:8088';
 var memberType='';//会员卡类型
 var dr ='';//标识
-var nowPage=1;//当前页
 
 $(function(){
-	layui.use(['form', 'layer','jquery'],function() {
-        var laydate = layui.laydate;
-        var  form = layui.form;
-		//查询会员卡类型
-        searchParentCode('VIP_TYPE');
-        //加载Table列表信息
-		sreachMemberCardList('','',1);
-        // 监听全选
-        form.on('checkbox(checkall)', function(data){
-
-          if(data.elem.checked){
-            $('tbody input').prop('checked',true);
-          }else{
-            $('tbody input').prop('checked',false);
-          }
-          form.render('checkbox');
-        }); 
-        
-        //获取会员卡类型下拉框值
-        form.on('select(memberType)',function(data){
-        	console.log("获取会员卡类型下拉框值");
-        	console.log(data.value)
-        	memberType =data.value;
-        });
-        //获取标识下拉框值
-        form.on('select(dr)',function(data){
-        	console.log("获取标识下拉框值");
-        	console.log(data.value)
-        	dr =data.value;
-        });
-        
-        // 重置事件
+	//加载table列表数据
+	layui.use(['table','form'],function(){
+		searchParentCode('VIP_TYPE');
+		//第一个实例
+		var table = layui.table;
+		var form = layui.form;
+		table.render({
+			elem: '#test',
+			height: 500,
+			url: URL+'/memberCard/queryMemberCardAll',//数据接口
+				method:'post',
+				where:{memberType:memberType,dr:dr},
+				contentType: 'application/json',
+				page: true,//开启分页
+				response: {
+				    "code": 0,
+				    "msg": "",
+				    "count": 1000,
+				    "data": []
+				}
+				,parseData: function(res){ //res 即为原始返回的数据
+				    console.log(res);
+				    return {
+				        "code": 0, //解析接口状态
+				        "msg": "", //解析提示文本
+				        "count": res.count, //解析数据长度
+				        "data": res.data //解析数据列表
+				    };
+				},
+				cols: [[ //表头
+						/*{checkbox: true},*/
+				  		{field: 'id', title: 'ID', width:'25%',unresize:true},
+				  		{field: 'memberType', title: '会员卡类型编码', width:'20%',unresize:true},
+				  		{field: 'memberName', title: '会员卡类型名称', width:'20%',unresize:true},
+				  		{field: 'cardNo', title: '会员卡卡号', width: '20%'},
+				  		{field: 'dr', title: '会员卡状态',unresize:true,width: '16%',align:'center',templet:function(d){
+				  			if(d.dr=='0'){
+				  				return '<span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span>'
+				  			}else{
+				  				return '<span class="layui-btn layui-btn-normal layui-btn-mini">未启用</span>'
+				  			}
+				  		}}
+			    ]]
+		});
+		//查询条件
+		var $ = layui.$,active = {
+	            reload: function () {
+	                var memberType = $('#memberType').val();
+	                var dr = $('#dr').val();
+	                console.log("手机号:"+memberType)
+	                table.reload('test', {
+	                    page: {
+	                        curr: 1//重新从第一页开始
+	                    },
+	                    where: {
+	                        memberType: memberType,
+	                        dr:dr
+	                    },
+	                    url: URL+'/memberCard/queryMemberCardAll',//数据接口
+	                    contentType: 'application/json',
+	                    method: 'post'
+	                });
+	            }
+	    };
+		$("#sreach").click(function(){//条件查询事情
+	    	var type = $(this).data('type');
+	        active[type] ? active[type].call(this) : '';
+    	});         
+    	// 重置事件
 		$("#reset").click(function(){
-			console.log("重置操作")
 			$("#memberType").val("");
 			$("#dr").val("");
 			memberType='';
-			dr ='';
+			dr='';
 			form.render("select");
+			
 	   });
-    });
-    
-    
-    $("#sreach").click(function(){
-    	var memberType = $("#memberType").val();
-    	var dr = $("#dr").val();
-    	console.log(memberType+'--'+dr)
-    	sreachMemberCardList(memberType,dr,1);
-    });
+
+	});
+	
 
 });
 
@@ -94,145 +124,3 @@ function searchParentCode(parentCode){
 	});
 }
 
-//查询会员卡信息列表
-function sreachMemberCardList(memberType,dr,currentPage){
-	console.log("当前页数:"+currentPage);
-	nowPage =currentPage;
-	$.ajax({
-	        url:URL+'/memberCard/queryMemberCardAll',
-	        contentType: "application/json;charset=UTF-8",
-	        type:'POST',
-	        dataType:'json',
-	        data:JSON.stringify({memberType:memberType,dr:dr,currentPage:currentPage}),
-	        success:function(data){
-	            //请求成功后执行的代码
-	            console.log(data);
-	            var list = eval(data);//解析json  
-	            if(list.code==200){//请求执行成功
-	            	console.log('请求执行成功');
-	            	console.log(list.data.memberCardList);
-	            	setTbodyHtml(list.data.memberCardList,currentPage,list.data.pageTotal);    
-	            }else{
-	            	layer.open({
-					    type: 0,
-					    title:'错误提示',
-					    content: list.msg
-					});
-	            }
-	        },
-	        error:function(data){
-	            //失败后执行的代码
-	            layer.open({
-					    type: 0,
-					    title:'错误提示',
-					    content: "请求数据失败!"
-					});
-	        }
-    });
-}
-
-//拼接会员卡列表信息
-function setTbodyHtml(data,currentPage,pageTotal){
-	console.log('总页数:'+pageTotal);
-	var tbody=document.getElementById("tbody-result");
-	var page =document.getElementById("pageinfo");
-	var pageStr="";
-	var str = "";
-	for(var i = 0;i < data.length;i++){//循环遍历数据  
-		var memberinfo = data[i];
-		str +="<tr>";    
-		str +="<td><input type=\"checkbox\" name=\"id\" value=\""+memberinfo.id+"\" lay-skin=\"primary\"/>";
-        str +="<div class=\"layui-unselect layui-form-checkbox\" lay-skin=\"primary\">";
-        str +="<i class=\"layui-icon layui-icon-ok\"></i></div>";
-        str +="</td>";
-		str +="<td>"+(i+1)+"</td>";
-		str +="<td>"+memberinfo.memberType+"</td>";
-		str +="<td>"+memberinfo.memberName+"</td>";
-		str +="<td>"+memberinfo.cardNo+"</td>";
-		str +="<td class=\"td-status\">";
-		if(memberinfo.dr=="0"){
-			str +="<span class=\"layui-btn layui-btn-normal layui-btn-mini\">已启用</span>";
-		}else{
-			str +="<span class=\"layui-btn layui-btn-normal layui-btn-mini\">未启用</span>";
-		}
-		str +="</td>";
-		str +="</tr>";
-	}
-	pageStr +="<div>";
-	if(pageTotal==1){
-		pageStr +="<a class=\"prev\" href=\"javascript:;\">&lt;&lt;</a>";
-		pageStr +="<span class=\"current\">1</span>";
-		pageStr +="<a class=\"next\" href=\"javascript:;\">&gt;&gt;</a>";
-	}
-	if(pageTotal >1){
-		if(currentPage==pageTotal){//当前页数等于最后一页
-			pageStr +="<a class=\"prev\" href=\"javascript:;\" onclick=\"sreachMemberCardList('"+memberType+"','"+dr+"',"+(nowPage-1)+")\">&lt;&lt;</a>";//可以点击上一页
-			for(var i =0;i<pageTotal;i++){
-				if(i==(pageTotal-1)){
-					pageStr +="<span class=\"current\">"+currentPage+"</span>";
-				}else{
-					pageStr +="<a class=\"num\" href=\"javascript:;\" onclick=\"sreachMemberCardList('"+memberType+"','"+dr+"',"+(i+1)+")\">"+(i+1)+"</a>";
-				}
-			}
-			pageStr +="<a class=\"next\" href=\"javascript:;\">&gt;&gt;</a>";//不能点击下一页
-		}
-		if(currentPage==1){//当前页数等于第一页
-			pageStr +="<a class=\"prev\" href=\"javascript:;\">&lt;&lt;</a>";//不能点击上一页
-			for(var i =0;i<pageTotal;i++){
-				if(i==(currentPage-1)){
-					pageStr +="<span class=\"current\">"+currentPage+"</span>";
-				}else{
-					pageStr +="<a class=\"num\" href=\"javascript:;\" onclick=\"sreachMemberCardList('"+memberType+"','"+dr+"',"+(i+1)+")\">"+(i+1)+"</a>";
-				}
-			}
-			pageStr +="<a class=\"next\" href=\"javascript:;\" onclick=\"sreachMemberCardList('"+memberType+"','"+dr+"',"+(nowPage+1)+")\">&gt;&gt;</a>";//可以点击下一页
-		}
-		if(currentPage>1){//当前也大于第一页 小于最后一页
-			if(currentPage<pageTotal){
-				pageStr +="<a class=\"prev\" href=\"javascript:;\" onclick=\"sreachMemberCardList('"+memberType+"','"+dr+"',"+(nowPage-1)+")\">&lt;&lt;</a>";//可以点击上一页
-			for(var i =0;i<pageTotal;i++){
-				if(i==(currentPage-1)){
-					pageStr +="<span class=\"current\">"+currentPage+"</span>";
-				}else{
-					pageStr +="<a class=\"num\" href=\"javascript:;\" onclick=\"sreachMemberCardList('"+memberType+"','"+dr+"',"+(i+1)+")\">"+(i+1)+"</a>";
-				}
-			}
-			pageStr +="<a class=\"next\" href=\"javascript:;\" onclick=\"sreachMemberCardList('"+memberType+"','"+dr+"',"+(nowPage+1)+")\">&gt;&gt;</a>";//可以点击下一页
-			}
-		}
-	}
-	
-	pageStr +="</div>";
-	tbody.innerHTML = str;
-	page.innerHTML = pageStr;
-}
-
-
-
-/*用户-删除*/
-function member_del(obj,id){
-    layer.confirm('确认要删除吗？',function(index){
-      //发异步删除数据
-      $(obj).parents("tr").remove();
-      layer.msg('已删除!',{icon:1,time:1000});
-    });
-}
-
-
-
-function delAll (argument) {
-    var ids = [];
-
-    // 获取选中的id 
-    $('tbody input').each(function(index, el) {
-        if($(this).prop('checked')){
-            ids.push($(this).val())
-        }
-    });
-  
-    layer.confirm('确认要删除吗？'+ids.toString(),function(index){
-        //捉到所有被选中的，发异步进行删除
-        layer.msg('删除成功', {icon: 1});
-        $(".layui-form-checked").not('.header').parents('tr').remove();
-    });
-}
