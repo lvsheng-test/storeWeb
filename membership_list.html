@@ -11,7 +11,8 @@
         <script src="./lib/layui/layui.js" charset="utf-8"></script>
         <script type="text/javascript" src="./js/xadmin.js"></script>
         <script type="text/javascript" src="js/jquery.min.js" ></script>
-        <script type="text/javascript" src="js/member/member_card.js" ></script>
+        <script src="./lib/layui/layui.js" charset="utf-8"></script>
+        <script type="text/javascript" src="js/member/membership_list.js" ></script>
         <!--[if lt IE 9]>
           <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
           <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
@@ -23,7 +24,7 @@
             <a href="">首页</a>
             <a href="">会员管理</a>
             <a>
-              <cite>会员卡库存录入</cite></a>
+              <cite>开通会员卡</cite></a>
           </span>
           <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" onclick="location.reload()" title="刷新">
             <i class="layui-icon layui-icon-refresh" style="line-height:30px"></i></a>
@@ -35,63 +36,55 @@
                         <div class="layui-card-body ">
                             <form class="layui-form layui-col-space5">
                                 <div class="layui-inline layui-show-xs-block">
-                                    <select id="memberType" name="memberType" class="valid" lay-filter="memberType" lay-verify="required">
-                                    	<option value=""></option>
-                                        <!--<option>消费卡</option>
-                                        <option>会员卡</option>
-                                        <option>押金卡</option>-->
-                                    </select>
+                                    <input type="text" name="mobile" id="mobile" placeholder="请输入手机号" autocomplete="off" class="layui-input">
                                 </div>
                                 <div class="layui-inline layui-show-xs-block">
-                                    <select name="dr" id="dr" lay-filter="dr" lay-verify="required">
-                                    	<option value=""></option>
-                                        <option value="0">已启用</option>
-                                        <option value="1">未启用</option>
-                                    </select>
-                                </div>
-                                
-                                <div class="layui-inline layui-show-xs-block">
-                                    <a class="layui-btn mgl-20 .j-kaka" id="sreach" data-type="reload"> 查询</a>
+                                    <a class="layui-btn mgl-20 .j-kaka" id="sreach" data-type="reload">查询</a>
         							<a class="layui-btn mgl-20 .j-kaka" id="reset"> 重置</a>
                                 </div>
                             </form>
                         </div>
                         <div class="layui-card-header">
-                            <!--<button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>-->
-                            <button class="layui-btn" onclick="xadmin.open('添加会员卡','./member_card_add.html',600,400)"><i class="layui-icon"></i>添加</button>
+                            <button class="layui-btn" onclick="xadmin.open('添加用户','./member-add.html',600,400)"><i class="layui-icon"></i>添加</button>
                         </div>
                         <div class="layui-card-body layui-table-body layui-table-main">
-                            <table class="layui-table layui-form" id="test" lay-filter="test">
+                            <table class="layui-table" id="test" lay-filter="test">
                                 <!--<thead>
-                                  	<tr>
-	                                    <th>
-	                                      <input type="checkbox" lay-filter="checkall" name="" lay-skin="primary">
-	                                    </th>
-	                                    <th>序号</th>
-	                                    <th>会员卡类型编码</th>
-	                                    <th>会员卡类型名称</th>
-	                                    <th>会员卡卡号</th>
-	                                    <th>状态</th>
-                                  	</tr>
+                                  <tr>
+                                    <th>
+                                      <input type="checkbox" lay-filter="checkall" name="" lay-skin="primary">
+                                    </th>
+                                    <th>序号</th>
+                                    <th>会员手机号</th>
+                                    <th>会员卡类型编码</th>
+                                    <th>会员卡类型名称</th>
+                                    <th>金额(元)</th>
+                                    <th>开始有效日期</th>
+                                    <th>结束有效日期</th>
+                                    <th>会员卡状态</th>
+                                  </tr>
                                 </thead>
-                                <tbody id="tbody-result">
+                                <tbody>
                                   <tr>
                                     <td>
-                                      <input type="checkbox" name="id" value="1" id="cardId"  lay-skin="primary"> 
+                                      <input type="checkbox" name="id" value="1"   lay-skin="primary"> 
                                     </td>
                                     <td>1</td>
-                                    <td>小明</td>
-                                    <td>男</td>
-                                    <td>13000000000</td>
+                                    <td>17521679331</td>
+                                    <td>D100000131</td>
+                                    <td>押金卡</td>
+                                    <td>1888</td>
+                                    <td>2020-07-03</td>
+                                    <td>2050-07-03</td>
                                     <td class="td-status">
-                                      <span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span>
+                                      <span class="layui-btn layui-btn-normal layui-btn-mini">有效</span>
                                     </td>
                                   </tr>
                                 </tbody>-->
                             </table>
                         </div>
                         <!--<div class="layui-card-body ">
-                            <div class="page" id="pageinfo">
+                            <div class="page">
                                 <div>
                                   <a class="prev" href="">&lt;&lt;</a>
                                   <a class="num" href="">1</a>
@@ -106,6 +99,6 @@
                 </div>
             </div>
         </div> 
+        
     </body>
-    
 </html>
