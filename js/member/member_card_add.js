@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-var URL='http://127.0.0.1:8088';
-=======
-var URL='http://localhost:8088';
->>>>>>> 883d70bea9b8486ed50b0336ac5ee080afa2a9d5
 
 $(function(){
 	layui.use(['form', 'layer','jquery'],function() {

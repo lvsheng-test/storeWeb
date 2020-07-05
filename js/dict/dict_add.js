@@ -1,4 +1,4 @@
-var URL='http://127.0.0.1:8088';
+
 $(function(){
 	layui.use(['form', 'layer'],function() {
                 $ = layui.jquery;
