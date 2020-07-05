@@ -1,4 +1,4 @@
-var URL='http://10.224.194.73:8088';
+var URL='http://localhost:8088';
 
 $(function(){
 	layui.use(['form', 'layer','jquery'],function() {
@@ -34,7 +34,7 @@ $(function(){
         //监听提交
         form.on('submit(add)',
         function(data) {
-            console.log(data.field);
+			var index = layer.getFrameIndex(window.name);
             $.ajax({
 		        url:URL+'/memberCard/insertMemberCardAll',
 		        contentType: "application/json;charset=UTF-8",
@@ -45,14 +45,11 @@ $(function(){
 		            //请求成功后执行的代码
 		            console.log(data);
 		            var list = eval(data);//解析json  
-		            if(list.code==200){//请求执行成功
+					if(list.code==200){//请求执行成功
+						layer.close(index);
 		            	layer.alert("增加成功", {icon: 6},
 	                    function() {
-	                        // 获得frame索引
-	                        var index = parent.layer.getFrameIndex(window.name);
-	                        //关闭当前frame
-	                        parent.layer.close(index);
-	                        window.parent.location.reload();
+	                        alert(1);
             			});
 		            }else{
 		            	layer.open({
