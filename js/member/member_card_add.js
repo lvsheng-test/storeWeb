@@ -1,4 +1,3 @@
-var URL='http://localhost:8088';
 
 $(function(){
 	layui.use(['form', 'layer','jquery'],function() {

@@ -1,4 +1,4 @@
-var URL='http://10.224.194.73:8088';
+
 var paranCode='';
 var nowPage=1;//当前页
 $(function(){

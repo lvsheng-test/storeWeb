@@ -1,4 +1,4 @@
-var URL='http://10.224.194.73:8088';
+
 $(function(){
 	layui.use(['form', 'layer'],function() {
                 $ = layui.jquery;

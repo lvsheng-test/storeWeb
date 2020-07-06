@@ -1,4 +1,4 @@
-var URL='http://10.224.194.73:8088';
+
 var mobile='';//手机号
 $(function(){
 	//加载table数据

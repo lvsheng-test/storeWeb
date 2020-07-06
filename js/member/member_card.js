@@ -1,4 +1,4 @@
-var URL='http://localhost:8088';
+
 var memberType='';//会员卡类型
 var dr ='';//标识
 
