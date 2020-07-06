@@ -54,16 +54,23 @@
                             <hr>
                         </div>
                         <div class="layui-card-header">
-                            <button class="layui-btn" onclick="xadmin.open('添加商品','./goodsAdd.html',600,400)">
+                            <button class="layui-btn" onclick="xadmin.open('添加商品','./goodsAdd.html',700,570)">
                                 <i class="layui-icon"></i>新增</button>
-                            <button class="layui-btn layui-btn-warm" onclick="delAll()">
-                              <i class="layui-icon"></i>修改</button>
                             <button class="layui-btn layui-btn-danger" onclick="delAll()">
                               <i class="layui-icon"></i>批量删除</button>
                         </div>
                         <div class="layui-card-body layui-table-body layui-table-main">
-                          <table class="layui-table layui-form" id="test" lay-filter="test">
+                          <table class="layui-table layui-form" id="table" lay-filter="table">
                           </table>
                       </div>
     </body>
+    <script type="text/html" id="barDemo">
+        <a title="编辑"  onclick="editOpen(this)" href="javascript:;" lay-event="edit">
+            <i class="layui-icon">&#xe642;</i>
+          </a>
+          
+          <a title="删除" onclick="delCate(this)" href="javascript:;" lay-event="del">
+            <i class="layui-icon">&#xe640;</i>
+          </a>
+      </script>
 </html>

@@ -12,7 +12,7 @@
         <script type="text/javascript" src="../lib/layui/layui.js" charset="utf-8"></script>
         <script type="text/javascript" src="../js/xadmin.js"></script>
         <script type="text/javascript" src="../js/jquery.min.js" ></script>
-        <script type="text/javascript" src="../js/member/member_card_add.js" ></script>
+        <script type="text/javascript" src="./goodsAdd.js" ></script>
         <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
         <!--[if lt IE 9]>
             <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
@@ -24,6 +24,7 @@
             <div class="layui-row">
                 <form class="layui-form">
                     <div class="layui-form-item">
+                        <input type="hidden" name="id" id="id" value="" />
                         <label for="L_username" class="layui-form-label">
                             <span class="x-red">*</span>商品名称</label>
                         <div class="layui-input-inline">
@@ -31,26 +32,39 @@
                         </div>
                     </div>
                     <div class="layui-form-item">
-                        <label for="L_email" class="layui-form-label">
-                            <span class="x-red">*</span>会员卡类型</label>
-                        <div class="layui-input-inline">
-                            <select id="member_type" name="memberType" class="valid" lay-verify="memberType">
-                            	<option value=""></option>
-                                <!--<option value="shentong">消费卡</option>
-                                <option value="shunfeng">会员卡</option>
-                                <option value="shunfeng">押金卡</option>-->
-                            </select>
-                        </div>
-                       
+                        <label for="L_username" class="layui-form-label">
+                            <span class="x-red">*</span>商品图片</label>
+                            <button type="button" class="layui-btn" id="upImg">上传图片</button>
+                            <div id="img_list">
+                            </div>
+                            <input type="button" id = "goodsUrl" style="display: none;" class="none" name="goodsUrl">
                     </div>
                     <div class="layui-form-item">
                         <label for="L_username" class="layui-form-label">
-                            <span class="x-red">*</span>开卡张数</label>
+                            <span class="x-red">*</span>商品单价</label>
                         <div class="layui-input-inline">
-                            <input type="text" id="L_number" name="number" required="" lay-verify="number" autocomplete="off" class="layui-input">
+                            <input type="text" id="goodsPrice" name="goodsPrice" required="" maxlength="10" autocomplete="off" class="layui-input">
                         </div>
-                        <div class="layui-form-mid layui-word-aux">
-                            <span class="x-red">*</span>一次性最多开10张卡片
+                    </div>
+                    <div class="layui-form-item">
+                        <label for="L_username" class="layui-form-label">
+                            <span class="x-red"></span>优惠价</label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="goodsDiscount" name="goodsDiscount" required="" maxlength="10" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label for="L_username" class="layui-form-label">
+                            <span class="x-red"></span>库存</label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="goodsNum" name="goodsNum" required="" maxlength="9" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label for="L_username" class="layui-form-label">
+                            <span class="x-red"></span>备注</label>
+                        <div class="layui-input-inline">
+                            <textarea id="goodsIntro" name="goodsIntro" type="text/plain" style="width:99%;height:130px"></textarea>
                         </div>
                     </div>
                     <div class="layui-form-item">
