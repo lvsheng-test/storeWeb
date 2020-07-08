@@ -1,7 +1,7 @@
 
 
 $(function(){
-	layui.use(['form', 'layer','jquery'],function() {
+	layui.use(['form', 'layer'],function() {
         $ = layui.jquery;
         var form = layui.form,
         layer = layui.layer;
@@ -34,23 +34,81 @@ $(function(){
         });
 
         //监听提交
-        form.on('submit(add)',
-        function(data) {
+        form.on('submit(add)',function(data) {//验证数据是否通过
+        	console.log('进来');
             console.log(data.field);
-            alert(data);
             //发异步，把数据提交给php
-            layer.alert("增加成功", {
-                icon: 6
-            },
-            function() {
-                //关闭当前frame
-                xadmin.close();
-
-                // 可以对父窗口进行刷新 
-                xadmin.father_reload();
-            });
+            $.ajax({
+		        url:URL+'/memberCard/queryCardNoAndMoblie',
+		        contentType: "application/json;charset=UTF-8",
+		        type:'POST',
+		        dataType:'json',
+		        data:JSON.stringify(data.field),
+		        success:function(data){
+		            //请求成功后执行的代码
+		            console.log(data);
+		            var list = eval(data);//解析json  
+		            if(list.code==200){//请求执行成功
+		            	layer.alert("增加成功", {icon: 6},
+	                    function() {
+	                        // 获得frame索引
+	                        var index = parent.layer.getFrameIndex(window.name);
+	                        //关闭当前frame
+	                        parent.layer.close(index);
+	                        window.parent.location.reload();
+            			});
+		            }else{
+		            	layer.msg(list.msg, {icon: 2,time: 2000});
+		            }
+		        },
+		        error:function(data){
+		            //失败后执行的代码
+		            layer.open({
+						    type: 0,
+						    title:'错误提示',
+						    content: "请求数据失败!"
+					});
+		        }
+	    	});
             return false;
         });
 
     });
+
 });
+
+//手机失去下标触发事件
+/*function mobileBlur(){
+	var cardNo = $("#card_no").val();
+	var mobile = $("#mobile").val();
+	console.log(cardNo+"--"+mobile);
+	$.ajax({
+	        url:URL+'/memberCard/queryCardNoAndMoblie',
+	        contentType: "application/json;charset=UTF-8",
+	        type:'POST',
+	        dataType:'json',
+	        data:JSON.stringify({cardNo:cardNo,mobile:mobile}),
+	        success:function(data){
+	            //请求成功后执行的代码
+	            var list = eval(data);//解析json  
+	            console.log(data);
+				if(list.code==200){//请求执行成功
+					console.log('验证通过')
+					return true;
+	            }else{
+	            	console.log(list.msg)
+	            	layer.msg(list.msg, {icon: 2,time: 2000});
+	            }
+	        },
+	        error:function(data){
+	            //失败后执行的代码
+	            layer.open({
+					    type: 0,
+					    title:'错误提示',
+					    content: "请求数据失败!"
+				});
+	        }
+    	});
+	
+	
+}*/

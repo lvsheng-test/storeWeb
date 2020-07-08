@@ -58,7 +58,7 @@
                         </div>
                         <div class="layui-card-header">
                             <!--<button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>-->
-                            <button class="layui-btn" onclick="xadmin.open('添加会员卡','./member_card_add.html',600,400)"><i class="layui-icon"></i>添加</button>
+                            <button class="layui-btn" onclick="xadmin.open('添加会员卡','./member_card_add.html',600,400)"><i class="layui-icon"></i>添加会员卡</button>
                         </div>
                         <div class="layui-card-body layui-table-body layui-table-main">
                             <table class="layui-table layui-form" id="test" lay-filter="test">
@@ -107,5 +107,11 @@
             </div>
         </div> 
     </body>
-    
+    <script type="text/html" id="toolbarDemo">
+        <div class = "layui-btn-container" > 
+            <!--<button class = "layui-btn layui-btn-sm" lay-event = "getCheckData" > 获取选中行数据 </button>
+            <button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button > -->
+            <!--<button class = "layui-btn layui-btn-sm" lay-event = "isAll" > 验证是否全选</button>-->
+        </div > 
+    </script>
 </html>

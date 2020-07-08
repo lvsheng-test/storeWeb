@@ -30,23 +30,23 @@ $(function(){
 				},
 				cols: [[ //表头
 						/*{checkbox: true},*/
-				  		{field: 'id', title: 'ID', width:'19%',unresize:true},
-				  		{field: 'mobile', title: '手机号', width:'10%',unresize:true},
-				  		{field: 'memberType', title: '会员卡类型编码', width:'10%',unresize:true},
-				  		{field: 'memberName', title: '会员卡类型名称', width:'10%',unresize:true},
-				  		{field: 'cardNo', title: '会员卡卡号', width: '15%',unresize:true},
-				  		{field: 'amount', title: '金额', width: '7%',unresize:true},
-				  		{field: 'startTime', title: '开始有效日期', width: '10%',unresize:true,templet:function(d){
+				  		{field: 'id', title: 'ID', width:'19%',unresize:true,sort:true},
+				  		{field: 'mobile', title: '手机号', width:'9%',unresize:true,sort:true},
+				  		{field: 'memberType', title: '会员卡类型', width:'10%',unresize:true,sort:true},
+				  		{field: 'memberName', title: '会员卡名称', width:'10%',unresize:true,sort:true},
+				  		{field: 'cardNo', title: '会员卡卡号', width: '15%',unresize:true,sort:true},
+				  		{field: 'amount', title: '金额（元）', width: '10%',unresize:true,sort:true},
+				  		{field: 'startTime', title: '开始日期', width: '10%',unresize:true,sort:true,templet:function(d){
 				  			return ''+getSmpFormatDateByLong(d.startTime,false)
 				  		}},
-				  		{field: 'endTime', title: '结束有效日期', width: '10%',unresize:true,templet:function(d){
+				  		{field: 'endTime', title: '结束日期', width: '10%',unresize:true,sort:true,templet:function(d){
 				  			return ''+getSmpFormatDateByLong(d.endTime,false)
 				  		}},
-				  		{field: 'dr', title: '会员卡状态',unresize:true, width: '10%',templet:function(d){
+				  		{field: 'dr', title: '会员卡状态',unresize:true, width: '8%',templet:function(d){
 				  			if(d.dr=='0'){
-				  				return '<span class="layui-btn layui-btn-normal layui-btn-mini">有效</span>'
+				  				return '<span class="layui-btn">有效</span>'
 				  			}else{
-				  				return '<span class="layui-btn layui-btn-normal layui-btn-mini">无效</span>'
+				  				return '<span class="layui-btn">无效</span>'
 				  			}
 				  		}}
 			    ]]

@@ -1,13 +1,12 @@
 
 $(function(){
-	layui.use(['form', 'layer','jquery'],function() {
-        $ = layui.jquery;
+	layui.use(['form', 'layer'],function() {
+		$ = layui.jquery;
         var form = layui.form,
         layer = layui.layer;
         
         //查询会员卡类型
         searchParentCode('VIP_TYPE');
-
         //自定义验证规则
         form.verify({
         	memberType:function(value){
@@ -30,11 +29,11 @@ $(function(){
                 }
             }
         });
+        
         //监听提交
-        form.on('submit(add)',
-        function(data) {
-			var index = layer.getFrameIndex(window.name);
-            $.ajax({
+        form.on('submit(add)',function(data) {
+        	console.log(data.field)
+        	$.ajax({
 		        url:URL+'/memberCard/insertMemberCardAll',
 		        contentType: "application/json;charset=UTF-8",
 		        type:'POST',
@@ -44,11 +43,14 @@ $(function(){
 		            //请求成功后执行的代码
 		            console.log(data);
 		            var list = eval(data);//解析json  
-					if(list.code==200){//请求执行成功
-						layer.close(index);
+		            if(list.code==200){//请求执行成功
 		            	layer.alert("增加成功", {icon: 6},
 	                    function() {
-	                        alert(1);
+	                        // 获得frame索引
+	                        var index = parent.layer.getFrameIndex(window.name);
+	                        //关闭当前frame
+	                        parent.layer.close(index);
+	                        window.parent.location.reload();
             			});
 		            }else{
 		            	layer.open({
@@ -67,14 +69,16 @@ $(function(){
 					});
 		        }
 	    	});
-            return false;
-        });
-
-    });
+        	return false;
+        });	
+	});
+	
+	
 });
 
 //根据父级编码查询字典信息
 function searchParentCode(parentCode){
+	console.log('进来')
 	$.ajax({
         url:URL+'/dict/searchParentCode',
         contentType: "application/json;charset=UTF-8",
@@ -108,4 +112,3 @@ function searchParentCode(parentCode){
         }
 	});
 }
-

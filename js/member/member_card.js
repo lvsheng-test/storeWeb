@@ -12,6 +12,7 @@ $(function(){
 		table.render({
 			elem: '#test',
 			height: 500,
+			toolbar:'#toolbarDemo',
 			url: URL+'/memberCard/queryMemberCardAll',//数据接口
 				method:'post',
 				where:{memberType:memberType,dr:dr},
@@ -34,15 +35,15 @@ $(function(){
 				},
 				cols: [[ //表头
 						/*{checkbox: true},*/
-				  		{field: 'id', title: 'ID', width:'25%',unresize:true},
-				  		{field: 'memberType', title: '会员卡类型编码', width:'20%',unresize:true},
-				  		{field: 'memberName', title: '会员卡类型名称', width:'20%',unresize:true},
-				  		{field: 'cardNo', title: '会员卡卡号', width: '20%'},
-				  		{field: 'dr', title: '会员卡状态',unresize:true,width: '16%',align:'center',templet:function(d){
+				  		{field: 'id', title: 'ID', width:'25%',unresize:true,sort:true},
+				  		{field: 'memberType', title: '会员卡类型编码', width:'20%',unresize:true,sort:true},
+				  		{field: 'memberName', title: '会员卡类型名称', width:'20%',unresize:true,sort:true},
+				  		{field: 'cardNo', title: '会员卡卡号', width: '20%',sort:true},
+				  		{field: 'dr', title: '会员卡状态',unresize:true,width: '16%',align:'center',sort:true,templet:function(d){
 				  			if(d.dr=='0'){
-				  				return '<span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span>'
+				  				return '<span class="layui-btn">已启用</span>'
 				  			}else{
-				  				return '<span class="layui-btn layui-btn-normal layui-btn-mini">未启用</span>'
+				  				return '<span class="layui-btn">未启用</span>'
 				  			}
 				  		}}
 			    ]]
