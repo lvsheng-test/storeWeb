@@ -56,52 +56,12 @@
                                 </div>
                             </form>
                         </div>
-                        <div class="layui-card-header">
-                            <!--<button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>-->
+                        <!--<div class="layui-card-header">
                             <button class="layui-btn" onclick="xadmin.open('添加会员卡','./member_card_add.html',600,400)"><i class="layui-icon"></i>添加会员卡</button>
-                        </div>
-                        <div class="layui-card-body layui-table-body layui-table-main">
-                            <table class="layui-table layui-form" id="test" lay-filter="test">
-                                <!--<thead>
-                                  	<tr>
-	                                    <th>
-	                                      <input type="checkbox" lay-filter="checkall" name="" lay-skin="primary">
-	                                    </th>
-	                                    <th>序号</th>
-	                                    <th>会员卡类型编码</th>
-	                                    <th>会员卡类型名称</th>
-	                                    <th>会员卡卡号</th>
-	                                    <th>状态</th>
-                                  	</tr>
-                                </thead>
-                                <tbody id="tbody-result">
-                                  <tr>
-                                    <td>
-                                      <input type="checkbox" name="id" value="1" id="cardId"  lay-skin="primary"> 
-                                    </td>
-                                    <td>1</td>
-                                    <td>小明</td>
-                                    <td>男</td>
-                                    <td>13000000000</td>
-                                    <td class="td-status">
-                                      <span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span>
-                                    </td>
-                                  </tr>
-                                </tbody>-->
-                            </table>
-                        </div>
-                        <!--<div class="layui-card-body ">
-                            <div class="page" id="pageinfo">
-                                <div>
-                                  <a class="prev" href="">&lt;&lt;</a>
-                                  <a class="num" href="">1</a>
-                                  <span class="current">2</span>
-                                  <a class="num" href="">3</a>
-                                  <a class="num" href="">489</a>
-                                  <a class="next" href="">&gt;&gt;</a>
-                                </div>
-                            </div>
                         </div>-->
+                        <div class="layui-card-body layui-table-body layui-table-main">
+                            <table class="layui-table layui-form" id="test" lay-filter="test"></table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -109,9 +69,7 @@
     </body>
     <script type="text/html" id="toolbarDemo">
         <div class = "layui-btn-container" > 
-            <!--<button class = "layui-btn layui-btn-sm" lay-event = "getCheckData" > 获取选中行数据 </button>
-            <button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button > -->
-            <!--<button class = "layui-btn layui-btn-sm" lay-event = "isAll" > 验证是否全选</button>-->
+        	<button class="layui-btn" onclick="xadmin.open('添加会员卡','./member_card_add.html',600,400)"><i class="layui-icon"></i>添加会员卡</button>
         </div > 
     </script>
 </html>

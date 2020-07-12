@@ -16,6 +16,11 @@
           <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
           <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
+        <style>
+        	.layui-form-label{
+        		width:100px;
+        	}
+        </style>
     </head>
     <body>
         <div class="x-nav">
@@ -43,61 +48,62 @@
                                 </div>
                             </form>
                         </div>
-                        <div class="layui-card-header">
+                        <!--<div class="layui-card-header">
                             <button class="layui-btn" onclick="xadmin.open('开通会员卡','./membership_add.html',600,400)"><i class="layui-icon"></i>开通会员卡</button>
-                        </div>
-                        <div class="layui-card-body layui-table-body layui-table-main">
-                            <table class="layui-table" id="test" lay-filter="test">
-                                <!--<thead>
-                                  <tr>
-                                    <th>
-                                      <input type="checkbox" lay-filter="checkall" name="" lay-skin="primary">
-                                    </th>
-                                    <th>序号</th>
-                                    <th>会员手机号</th>
-                                    <th>会员卡类型编码</th>
-                                    <th>会员卡类型名称</th>
-                                    <th>金额(元)</th>
-                                    <th>开始有效日期</th>
-                                    <th>结束有效日期</th>
-                                    <th>会员卡状态</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  <tr>
-                                    <td>
-                                      <input type="checkbox" name="id" value="1"   lay-skin="primary"> 
-                                    </td>
-                                    <td>1</td>
-                                    <td>17521679331</td>
-                                    <td>D100000131</td>
-                                    <td>押金卡</td>
-                                    <td>1888</td>
-                                    <td>2020-07-03</td>
-                                    <td>2050-07-03</td>
-                                    <td class="td-status">
-                                      <span class="layui-btn layui-btn-normal layui-btn-mini">有效</span>
-                                    </td>
-                                  </tr>
-                                </tbody>-->
-                            </table>
-                        </div>
-                        <!--<div class="layui-card-body ">
-                            <div class="page">
-                                <div>
-                                  <a class="prev" href="">&lt;&lt;</a>
-                                  <a class="num" href="">1</a>
-                                  <span class="current">2</span>
-                                  <a class="num" href="">3</a>
-                                  <a class="num" href="">489</a>
-                                  <a class="next" href="">&gt;&gt;</a>
-                                </div>
-                            </div>
+                            <button class="layui-btn" onclick="doRecharge()"><i class="layui-icon"></i>充值</button>
                         </div>-->
+                        <div class="layui-card-body layui-table-body layui-table-main">
+                            <table class="layui-table" id="test" lay-filter="test"></table>
+                            <script type="text/html" id="toolbarDemo">
+                            	<div class = "layui-btn-container" >
+                            		<button class="layui-btn" onclick="xadmin.open('开通会员卡','./membership_add.html',600,400)"><i class="layui-icon"></i>开通会员卡</button>
+                            		<button class="layui-btn" lay-event="doRecharge"><i class="layui-icon"></i>充值</button>
+                            	</div>
+                            </script>
+                        </div>
                     </div>
                 </div>
             </div>
         </div> 
         
+        <!--充值弹窗-->
+        <div class="layui-fluid" style="display: none;" id="rechargeId">
+            <div class="layui-row">
+                <form class="layui-form">
+                    <div class="layui-form-item">
+                        <label for="card_no" class="layui-form-label">会员卡号</label>
+                        <div class="layui-input-inline">
+                        	<input type="hidden" id="id"  name="id"/>
+                            <input type="text" id="card_no" name="cardNo" required="" autocomplete="off" class="layui-input" disabled="disabled">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label for="mobile" class="layui-form-label">手机号</label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="member_mobile" name="mobile" required="" autocomplete="off" class="layui-input" disabled="disabled">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label for="amount" class="layui-form-label">账户余额（元）</label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="amount" name="amount" required="" autocomplete="off" class="layui-input" disabled="disabled">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label for="amount" class="layui-form-label">
+                            <span class="x-red">*</span>充值金额（元）</label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="recharge_amount" name="rechargeAmount" required="" lay-verify="rechargeAmount" autocomplete="off" class="layui-input"></div>
+                        <div class="layui-form-mid layui-word-aux">
+                            <span class="x-red">*</span>不允许小数点类型必须是整数
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+			            <label for="L_repass" class="layui-form-label"></label>
+			            <button class="layui-btn" lay-filter="add" lay-submit="">增加</button>
+			        </div>
+                </form>
+            </div>
+        </div>
     </body>
 </html>
