@@ -1,9 +1,12 @@
 
 var mobile='';//手机号
+var memberType='';//会员卡类型
 $(function(){
 	//加载table数据
-	layui.use('table', function(){
+	layui.use(['table','form'], function(){
+		searchParentCode('VIP_TYPE');
 	    var table = layui.table;
+	    var form = layui.form;
 	    //第一个实例
 	    table.render({
 		    elem: '#test',
@@ -57,13 +60,15 @@ $(function(){
 		var $ = layui.$,active = {
 	            reload: function () {
 	                var mobile = $('#mobile').val();
+	                var memberType = $('#memberType').val();
 	                console.log("手机号:"+mobile)
 	                table.reload('test', {
 	                    page: {
 	                        curr: 1//重新从第一页开始
 	                    },
 	                    where: {
-	                        mobile: mobile
+	                        mobile: mobile,
+	                        memberType:memberType,
 	                    },
 	                    url: URL+'/memberCard/queryMembershipByPageList',//数据接口
 	                    contentType: 'application/json',
@@ -78,7 +83,10 @@ $(function(){
     	// 重置事件
 		$("#reset").click(function(){
 			$("#mobile").val("");
+			$("#memberType").val("");
 			mobile='';
+			memberType='';
+			form.render("select");
 	   });
 	   
 	    //头工具栏事件 充值事件
@@ -183,3 +191,39 @@ $(function(){
 
 });
 
+
+//获取会员卡下拉框
+function searchParentCode(parentCode){
+	$.ajax({
+        url:URL+'/dict/searchParentCode',
+        contentType: "application/json;charset=UTF-8",
+        type:'POST',
+        dataType:'json',
+        data:JSON.stringify({parentCode:parentCode}),
+        success:function(data){
+            //请求成功后执行的代码
+            console.log(data);
+            var list = eval(data);//解析json  
+            if(list.code==200){//请求执行成功
+            	$.each(list.data.dictList, function (index, item) {
+						$("#memberType").append(new Option(item.name,item.code));// 下拉菜单里添加元素
+					});
+					layui.form.render("select");
+            }else{
+            	layer.open({
+				    type: 0,
+				    title:'错误提示',
+				    content: list.msg
+				});
+            }
+        },
+        error:function(data){
+            //失败后执行的代码
+            layer.open({
+				    type: 0,
+				    title:'错误提示',
+				    content: "请求数据失败!"
+			});
+        }
+	});
+}

@@ -102,17 +102,16 @@ function saveGoods(){
 				        dataType:'json',
 				        data:JSON.stringify(data.field),
 				        success:function(data){
-							//关闭当前frame
-							xadmin.close();
 				            //请求成功后执行的代码
 				            var list = eval(data);//解析json  
 							if(list.code==200){//请求执行成功
-								layer.closeAll();
-				            	layer.open({
-								    type: 0,
-								    title:'提示',
-								    content: "保存成功"
-								});
+								layer.alert("增加成功", {icon: 6},function() {
+			                        // 获得frame索引
+			                        var index = parent.layer.getFrameIndex(window.name);
+			                        //关闭当前frame
+			                        parent.layer.close(index);
+			                        window.parent.location.reload();
+            					});
 				            }else{
 				            	layer.open({
 								    type: 0,

@@ -43,15 +43,16 @@
                                     <input type="text" name="mobile" id="mobile" placeholder="请输入手机号" autocomplete="off" class="layui-input">
                                 </div>
                                 <div class="layui-inline layui-show-xs-block">
+                                    <select id="memberType" name="memberType" class="valid" lay-filter="memberType" lay-verify="required">
+                                    	<option value="">请选择会员类型</option>
+                                    </select>
+                                </div>
+                                <div class="layui-inline layui-show-xs-block">
                                     <a class="layui-btn mgl-20 .j-kaka" id="sreach" data-type="reload">查询</a>
         							<a class="layui-btn mgl-20 .j-kaka" id="reset"> 重置</a>
                                 </div>
                             </form>
                         </div>
-                        <!--<div class="layui-card-header">
-                            <button class="layui-btn" onclick="xadmin.open('开通会员卡','./membership_add.html',600,400)"><i class="layui-icon"></i>开通会员卡</button>
-                            <button class="layui-btn" onclick="doRecharge()"><i class="layui-icon"></i>充值</button>
-                        </div>-->
                         <div class="layui-card-body layui-table-body layui-table-main">
                             <table class="layui-table" id="test" lay-filter="test"></table>
                             <script type="text/html" id="toolbarDemo">
