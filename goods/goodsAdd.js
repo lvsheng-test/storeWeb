@@ -106,7 +106,8 @@ function saveGoods(){
 							xadmin.close();
 				            //请求成功后执行的代码
 				            var list = eval(data);//解析json  
-				            if(list.code==200){//请求执行成功
+							if(list.code==200){//请求执行成功
+								layer.closeAll();
 				            	layer.open({
 								    type: 0,
 								    title:'提示',

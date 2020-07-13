@@ -1,7 +1,7 @@
 
 
 var URL_LOCAL='http://127.0.0.1:8088';
-var goodsName = $("#categoryName").val();//商品名称
+var URL_IMG = 'http://127.0.0.1:8080';
 
 $(function(){
 	//加载table列表数据
@@ -14,7 +14,7 @@ $(function(){
 			height: 500,
 			url: URL_LOCAL+'/goods/list',//数据接口
 			method:'post',
-			where:{goodsName:goodsName},
+			where:{goodsName:""},
 			contentType: 'application/json',
 			page: true,//开启分页
 			parseData: function(res){ //res 即为原始返回的数据
@@ -29,8 +29,13 @@ $(function(){
 						{checkbox: true},
 				  		{field: 'id', title: 'ID', width:'10%',unresize:true},
 						{field: 'goodsName', title: '商品名称', width:'10%',unresize:true},
-						{field: 'goodsPrice', title: '商品单价', width:'10%',unresize:true},
-						{field: 'goodsDiscount', title: '商品优惠价', width:'10%',unresize:true},
+						{field: 'goodsUrl', title: '商品主图',unresize:true,width: '10%',align:'center',templet:function(cate){
+							if(cate.goodsUrl){
+								return "<a href='#' onclick='shopImg(\""+cate.goodsUrl+"\")'>查看</a>";
+							}
+						}},
+						{field: 'goodsPrice', title: '商品单价', width:'5%',unresize:true},
+						{field: 'goodsDiscount', title: '商品优惠价', width:'5%',unresize:true},
 						{field: 'goodsNum', title: '商品库存', width:'10%',unresize:true},
                         {field: 'goodsStatus', title: '商品状态',unresize:true,width: '10%',align:'center',templet:function(cate){
 							switch(cate.goodsStatus){
@@ -57,7 +62,7 @@ $(function(){
 	                        curr: 1//重新从第一页开始
 	                    },
 	                    where: {
-	                        categoryName: categoryName
+	                        goodsName: $("#goodsName").val()
 	                    },
 	                    url: URL+'/category/list',//数据接口
 	                    contentType: 'application/json',
@@ -127,8 +132,18 @@ $(function(){
 
 
 });
-function editOpen(obj){
-	
+function shopImg(goodsUrl){
+           //页面层
+           layer.open({
+               type: 1,
+               skin: 'none', //加上边框
+               area: ['45%', '65%'], //宽高
+               shadeClose: true, //开启遮罩关闭
+               end: function (index, layero) {
+                   return false;
+               },
+               content: '<div style="text-align:center"><img src="' + URL_IMG + goodsUrl + '" /></div>'
+           });
 }
 
 
