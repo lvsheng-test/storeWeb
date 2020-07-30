@@ -1,11 +1,8 @@
-var url = URL+'/goods/addGoods';
-
-
-layui.use('upload', function() {
+/* layui.use('upload', function() {
 	var upload = layui.upload;
 	var uploadInst = upload.render({
 		elem: '#upImg',
-		url: URL + '/goods/uploadFile',
+		url: URL_LOCAL + '/goods/uploadFile',
 		auto: false,
 		bindAction: "#goodsUrl",
 		choose: function(obj) {
@@ -44,7 +41,7 @@ layui.use('upload', function() {
 
 		}
 	});
-});
+}); */
 
 $(function(){
 	loadId();
@@ -74,8 +71,55 @@ function loadId(){
 	$("#goodsDiscount").val(regValue(goodsDiscount));
 	$("#goodsNum").val(regValue(goodsNum));
 	$("#goodsIntro").val(regValue(goodsIntro));
+	var json = {};
+	json.id = id;
+	$.ajax({
+		url:URL_LOCAL + "/goods/queryGoodsPic",
+		contentType: "application/json;charset=UTF-8",
+		type:'POST',
+		dataType:'json',
+		data:JSON.stringify(json),
+		success:function(data){
+			//请求成功后执行的代码
+			var list = eval(data.data);//解析json  
+			for(var i =0;i<list.length;i++){
+			$('#demo2').append('<img style="height:100px;width:80px;margin-left: 15px;cursor: pointer;" src="'+ list[i].goodsUrl +'" class="layui-upload-img" onclick="closeImg(this)">')
+			}
+		}
+	});
 	return theRequest; 
 }
+
+var array=[];
+layui.use('upload', function(){
+	var $ = layui.jquery
+	,upload = layui.upload;
+	upload.render({
+		elem: '#goodsMoreUrl'
+		,url: URL_LOCAL + '/goods/uploadFile' //改成您自己的上传接口
+		,multiple: true
+		,before: function(obj){
+		  //预读本地文件示例，不支持ie8
+		  obj.preview(function(index, file, result){
+			$('#demo2').append('<img style="height:100px;width:80px;margin-left: 15px;" src="'+ result +'" alt="'+ file.name +'" class="layui-upload-img" onclick="closeImg(this)">')
+		  });
+		}
+		,done: function(res){
+		  //上传完毕
+		  array.push(res.data);
+		}
+	  });
+});
+
+//删掉图片
+function closeImg(obj){
+	layer.confirm('确定要删除这张图片吗？', function(index){
+		$(obj).remove();
+		layer.close(layer.index);
+	}, function () {
+	});
+}
+
 
 function regValue(obj){
 	if("undefined" == obj || undefined == obj){
@@ -85,9 +129,10 @@ function regValue(obj){
 }
 
 function saveGoods(){
+	var url = URL_LOCAL + '/goods/addGoods';
 	var id = $("#id").val();
 	if("undefined" != id && undefined != id && "" != id && null != id){
-		url = URL+'/goods/editGoods';
+		url = URL_LOCAL+'/goods/editGoods';
 	}
 	layui.use(['form', 'layer'],function() {
                 $ = layui.jquery;
@@ -95,22 +140,22 @@ function saveGoods(){
                 layer = layui.layer;
                 //监听提交
                 form.on('submit(add)',function(data) {
+					let json = data.field;
+					json.pictureList = array;
                     $.ajax({
 				        url:url,
 				        contentType: "application/json;charset=UTF-8",
 				        type:'POST',
 				        dataType:'json',
-				        data:JSON.stringify(data.field),
+				        data:JSON.stringify(json),
 				        success:function(data){
 				            //请求成功后执行的代码
 				            var list = eval(data);//解析json  
 							if(list.code==200){//请求执行成功
-								layer.alert("增加成功", {icon: 6},function() {
-			                        // 获得frame索引
-			                        var index = parent.layer.getFrameIndex(window.name);
-			                        //关闭当前frame
-			                        parent.layer.close(index);
-			                        window.parent.location.reload();
+								layer.alert("保存成功", {icon: 6},function() {
+									// 获得frame索引
+									xadmin.close();
+								//layer.close(layer.index);
             					});
 				            }else{
 				            	layer.open({
@@ -136,3 +181,4 @@ function saveGoods(){
 
            });
 }
+

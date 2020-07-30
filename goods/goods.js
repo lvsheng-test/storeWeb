@@ -1,8 +1,3 @@
-
-
-var URL_LOCAL='http://127.0.0.1:8088';
-var URL_IMG = 'http://127.0.0.1:8080';
-
 $(function(){
 	//加载table列表数据
 	layui.use(['table','form'],function(){
@@ -14,7 +9,7 @@ $(function(){
 			height: 500,
 			url: URL_LOCAL+'/goods/list',//数据接口
 			method:'post',
-			where:{goodsName:""},
+			where:{goodsName:'11'},
 			contentType: 'application/json',
 			page: true,//开启分页
 			parseData: function(res){ //res 即为原始返回的数据
@@ -30,9 +25,7 @@ $(function(){
 				  		{field: 'id', title: 'ID', width:'10%',unresize:true},
 						{field: 'goodsName', title: '商品名称', width:'10%',unresize:true},
 						{field: 'goodsUrl', title: '商品主图',unresize:true,width: '10%',align:'center',templet:function(cate){
-							if(cate.goodsUrl){
-								return "<a href='#' onclick='shopImg(\""+cate.goodsUrl+"\")'>查看</a>";
-							}
+							return "<a href='#' onclick='shopImg(\""+cate.goodsUrl+"\")'>查看</a>";
 						}},
 						{field: 'goodsPrice', title: '商品单价', width:'5%',unresize:true},
 						{field: 'goodsDiscount', title: '商品优惠价', width:'5%',unresize:true},
@@ -56,7 +49,6 @@ $(function(){
 		//查询条件
 		var $ = layui.$,active = {
 	            reload: function () {
-					var categoryName = $('#categoryName').val();
 	                table.reload('table', {
 	                    page: {
 	                        curr: 1//重新从第一页开始
@@ -64,7 +56,7 @@ $(function(){
 	                    where: {
 	                        goodsName: $("#goodsName").val()
 	                    },
-	                    url: URL+'/category/list',//数据接口
+	                    url: URL_LOCAL+'/goods/list',//数据接口
 	                    contentType: 'application/json',
 	                    method: 'post'
 	                });
@@ -85,11 +77,10 @@ $(function(){
 	   //监听行工具事件
 		table.on('tool(table)', function(obj){
 			var data = obj.data;
-			//console.log(obj)
 			if(obj.event === 'del'){
 			layer.confirm('确定要删除吗？', function(index){
 				$.ajax({
-					url:URL + "/goods/delGoods",
+					url:URL_LOCAL + "/goods/delGoods",
 					contentType: "application/json;charset=UTF-8",
 					type:'POST',
 					dataType:'json',
@@ -122,7 +113,6 @@ $(function(){
 			});
 			} else if(obj.event === 'edit'){
 				var url = './goodsAdd.html?id='+data.id+'&goodsName='+data.goodsName+'&goodsPrice='+data.goodsPrice+'&goodsDiscount='+data.goodsDiscount+'&goodsNum='+data.goodsNum+'&goodsIntro='+data.goodsIntro;
-				console.log(url);
 				url = encodeURI(encodeURI(url));
 				xadmin.open('编辑',url,700,570);
 			}
@@ -142,7 +132,7 @@ function shopImg(goodsUrl){
                end: function (index, layero) {
                    return false;
                },
-               content: '<div style="text-align:center"><img src="' + URL_IMG + goodsUrl + '" /></div>'
+               content: '<div style="text-align:center"><img src="' + goodsUrl + '" /></div>'
            });
 }
 

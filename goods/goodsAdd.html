@@ -31,13 +31,16 @@
                             <input type="text" id="goodsName" name="goodsName" required="" maxlength="36" autocomplete="off" class="layui-input">
                         </div>
                     </div>
-                    <div class="layui-form-item">
+                    <div class="layui-upload">
                         <label for="L_username" class="layui-form-label">
                             <span class="x-red">*</span>商品图片</label>
-                            <button type="button" class="layui-btn" id="upImg">上传图片</button>
-                            <div id="img_list">
-                            </div>
-                            <input type="button" id = "goodsUrl" style="display: none;" class="none" name="goodsUrl">
+                        <button type="button" class="layui-btn" id="goodsMoreUrl">多图片上传</button> 
+                        <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
+                          预览图：
+                          <div class="layui-upload-list" id="demo2"></div>
+                       </blockquote>
+                       <input type="button" id = "goodsUrl" style="display: none;" class="none" name="goodsUrl">
+
                     </div>
                     <div class="layui-form-item">
                         <label for="L_username" class="layui-form-label">
