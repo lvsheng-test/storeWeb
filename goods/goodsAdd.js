@@ -46,6 +46,32 @@
 $(function(){
 	loadId();
 	saveGoods();
+	searchGoodsType();
+	
+	layui.use('upload', function(){
+    	var $ = layui.jquery
+  		,upload = layui.upload;
+  		//拖拽上传
+		upload.render({
+		    elem: '#test10',
+		    url: URL_LOCAL + '/upload/uploadFile', //改成您自己的上传接口
+		    multiple: true,
+		    before: function(obj){
+			  //预读本地文件示例，不支持ie8
+			  obj.preview(function(index, file, result){
+				//layui.$('#uploadDemoView').removeClass('layui-hide').find('img').attr('src',result);
+			  });
+			},
+		    done: function(res){
+		      layer.msg('上传成功');
+		  	  console.log(res)
+		      //layui.$('#uploadDemoView').removeClass('layui-hide').find('img').attr('src', res.files.file);
+		      $('#ramark_url').val(res.data);
+		      layui.$('#uploadDemoView').removeClass('layui-hide').find('img').attr('src',res.data);
+		    }
+		});
+  		
+    });
 })
 
 function loadId(){
@@ -96,7 +122,7 @@ layui.use('upload', function(){
 	,upload = layui.upload;
 	upload.render({
 		elem: '#goodsMoreUrl'
-		,url: URL_LOCAL + '/goods/uploadFile' //改成您自己的上传接口
+		,url: URL_LOCAL + '/upload/uploadFile' //改成您自己的上传接口
 		,multiple: true
 		,before: function(obj){
 		  //预读本地文件示例，不支持ie8
@@ -138,6 +164,24 @@ function saveGoods(){
                 $ = layui.jquery;
                 var form = layui.form,
                 layer = layui.layer;
+                
+                
+                //自定义验证规则
+		        form.verify({
+		        	categoryId:function(value){
+		        		console.log('商品类型:'+value.length);
+		            	if(value.length ==0){
+		            		return '请选择商品类型';
+		            	}
+		            },
+		            goodsName: function(value) {
+		            	console.log('商品:'+value)
+		                if(value.length == 0){
+		                	return '请填写商品名称信息';
+		                }
+		            }
+		        });
+                
                 //监听提交
                 form.on('submit(add)',function(data) {
 					let json = data.field;
@@ -154,7 +198,12 @@ function saveGoods(){
 							if(list.code==200){//请求执行成功
 								layer.alert("保存成功", {icon: 6},function() {
 									// 获得frame索引
-									xadmin.close();
+									// 获得frame索引
+			                        var index = parent.layer.getFrameIndex(window.name);
+			                        //关闭当前frame
+			                        parent.layer.close(index);
+			                        window.parent.location.reload();
+									//xadmin.close();
 								//layer.close(layer.index);
             					});
 				            }else{
@@ -182,3 +231,38 @@ function saveGoods(){
            });
 }
 
+//查询商品类型列表
+function searchGoodsType(){
+	console.log('进来')
+	$.ajax({
+        url:URL_LOCAL+'/category/goodsTypeList',
+        contentType: "application/json;charset=UTF-8",
+        type:'POST',
+        dataType:'json',
+        success:function(data){
+            //请求成功后执行的代码
+            console.log(data);
+            var list = eval(data);//解析json  
+            if(list.code==200){//请求执行成功
+            	$.each(list.data, function (index, item) {
+						$("#goods_type").append(new Option(item.categoryName,item.id));// 下拉菜单里添加元素
+					});
+					layui.form.render("select");
+            }else{
+            	layer.open({
+				    type: 0,
+				    title:'错误提示',
+				    content: list.msg
+				});
+            }
+        },
+        error:function(data){
+            //失败后执行的代码
+            layer.open({
+				    type: 0,
+				    title:'错误提示',
+				    content: "请求数据失败!"
+			});
+        }
+	});
+}

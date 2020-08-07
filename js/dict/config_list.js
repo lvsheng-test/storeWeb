@@ -6,7 +6,7 @@ $(function(){
         table.render({
         	elem: '#test',
         	height: 500,
-			url: URL+'/dict/queryConfigAll',//数据接口
+			url: URL_LOCAL+'/dict/queryConfigAll',//数据接口
 			method:'post',
 			//where:{mobile:mobile},
 			contentType: 'application/json',

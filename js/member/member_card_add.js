@@ -34,7 +34,7 @@ $(function(){
         form.on('submit(add)',function(data) {
         	console.log(data.field)
         	$.ajax({
-		        url:URL+'/memberCard/insertMemberCardAll',
+		        url:URL_LOCAL+'/memberCard/insertMemberCardAll',
 		        contentType: "application/json;charset=UTF-8",
 		        type:'POST',
 		        dataType:'json',
@@ -80,7 +80,7 @@ $(function(){
 function searchParentCode(parentCode){
 	console.log('进来')
 	$.ajax({
-        url:URL+'/dict/searchParentCode',
+        url:URL_LOCAL+'/dict/searchParentCode',
         contentType: "application/json;charset=UTF-8",
         type:'POST',
         dataType:'json',

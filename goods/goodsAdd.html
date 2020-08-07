@@ -23,12 +23,21 @@
         <div class="layui-fluid">
             <div class="layui-row">
                 <form class="layui-form">
+                	<div class="layui-form-item">
+                        <label for="L_email" class="layui-form-label">
+                            <span class="x-red">*</span>商品类型</label>
+                        <div class="layui-input-inline">
+                            <select id="goods_type" name="categoryId" class="valid" lay-verify="categoryId">
+                            	<option value=""></option>
+                            </select>
+                        </div>
+                    </div>
                     <div class="layui-form-item">
                         <input type="hidden" name="id" id="id" value="" />
                         <label for="L_username" class="layui-form-label">
                             <span class="x-red">*</span>商品名称</label>
                         <div class="layui-input-inline">
-                            <input type="text" id="goodsName" name="goodsName" required="" maxlength="36" autocomplete="off" class="layui-input">
+                            <input type="text" id="goodsName" name="goodsName" required="" lay-verify="goodsName" maxlength="36" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-upload">
@@ -63,11 +72,53 @@
                             <input type="text" id="goodsNum" name="goodsNum" required="" maxlength="9" autocomplete="off" class="layui-input">
                         </div>
                     </div>
+                    
+                    <div class="layui-form-item">
+                        <label for="L_username" class="layui-form-label">
+                            <span class="x-red">*</span>净含量(g)</label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="net_content" name="netContent" required="" maxlength="9" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    
+                    <div class="layui-form-item">
+                        <label for="L_username" class="layui-form-label">
+                            <span class="x-red">*</span>保存条件</label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="save_conditions" name="saveConditions" required="" maxlength="9" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    
+                    <div class="layui-form-item">
+                        <label for="L_username" class="layui-form-label">
+                            <span class="x-red">*</span>保质期(天)</label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="shelf_life" name="shelfLife" required="" maxlength="9" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    
+                    <div class="layui-form-item">
+						<label for="L_username" class="layui-form-label">
+                            <span class="x-red">*</span>产品介绍图
+                    	</label>
+						<div class="layui-upload-drag" id="test10">
+							<i class="layui-icon"></i>
+							<p>点击上传，或将图片拖拽到此处</p>
+							<div class="layui-hide" id="uploadDemoView">
+								<hr>
+								<img src="" alt="上传成功后渲染" style="max-width: 192px">
+							</div>
+						</div>
+					</div>
+                    
+                    
+                    
                     <div class="layui-form-item">
                         <label for="L_username" class="layui-form-label">
                             <span class="x-red"></span>备注</label>
                         <div class="layui-input-inline">
-                            <textarea id="goodsIntro" name="goodsIntro" type="text/plain" style="width:99%;height:130px"></textarea>
+                        	<input type="hidden" name="ramarkUrl" id="ramark_url"/>
+                            <textarea id="goodsIntro" name="goodsIntro" type="text/plain" style="width:700px;height:130px"></textarea>
                         </div>
                     </div>
                     <div class="layui-form-item">

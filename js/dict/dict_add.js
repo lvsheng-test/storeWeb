@@ -7,7 +7,7 @@ $(function(){
                 
                 //查询字典表列表
 	        $.ajax({
-		        url:URL+'/dict/getDictParentCode',
+		        url:URL_LOCAL+'/dict/getDictParentCode',
 		        success:function(data){
 		            //请求成功后执行的代码
 		            console.log(data);
@@ -42,7 +42,7 @@ $(function(){
                     console.log(data);
                     //发异步，把数据提交给php
                     $.ajax({
-				        url:URL+'/dict/inserDictInfo',
+				        url:URL_LOCAL+'/dict/inserDictInfo',
 				        contentType: "application/json;charset=UTF-8",
 				        type:'POST',
 				        dataType:'json',

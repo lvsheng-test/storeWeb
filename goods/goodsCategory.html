@@ -18,15 +18,16 @@
           <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
           <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
+        
     </head>
 
     <body>
         <div class="x-nav">
             <span class="layui-breadcrumb">
                 <a href="">首页</a>
-                <a href="">演示</a>
+                <a href="">商品管理</a>
                 <a>
-                    <cite>导航元素</cite></a>
+                    <cite>商品类型</cite></a>
             </span>
             <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" onclick="location.reload()" title="刷新">
                 <i class="layui-icon layui-icon-refresh" style="line-height:30px"></i>
@@ -47,7 +48,7 @@
                             <hr>
                         </div>
                         <div class="layui-card-header">
-                            <button class="layui-btn" onclick="xadmin.open('添加分类','./goodsCategoryAdd.html',600,400)">
+                            <button class="layui-btn" onclick="xadmin.open('添加商品类型','./goodsCategoryAdd.html',650,550)">
                                 <i class="layui-icon"></i>新增</button>
                             <button class="layui-btn layui-btn-danger" onclick="delAll()">
                               <i class="layui-icon"></i>批量删除</button>
@@ -56,9 +57,59 @@
                           <table class="layui-table layui-form" id="table" lay-filter="table">
                           </table>
                       </div>
+                      
+            <!--
+            	作者：719628179@qq.com
+            	时间：2020-08-06
+            	描述：编辑商品类型
+            -->          
+            <div class="layui-fluid" style="display: none;" id="exitGoods">
+            <div class="layui-row">
+                <form class="layui-form">
+                    <div class="layui-form-item">
+                        <label for="L_username" class="layui-form-label">
+                            <span class="x-red">*</span>商品类型
+                        </label>
+                        <div class="layui-input-inline">
+                        	<input type="text" name="categoryName" id="category_name" placeholder="请输入商品类型名" required="" lay-verify="categoryName" autocomplete="off" class="layui-input">
+                        	<input type="hidden" name="categoryUrl" id="category_url"/>
+                        	<input type="hidden" name="id" id="category_id"/>
+                        </div>
+                    </div>                    	
+					<div class="layui-form-item">
+						<label for="L_username" class="layui-form-label">
+                            <span class="x-red">*</span>商品LOGO
+                    	</label>
+						<div class="layui-upload-drag" id="test10">
+							<i class="layui-icon"></i>
+							<p>点击上传，或将图片拖拽到此处</p>
+							<div class="layui-hide" id="uploadDemoView">
+								<hr>
+								<img src="" alt="上传成功后渲染" style="max-width: 150px" id="imageId">
+							</div>
+						</div>
+					</div>
+                    <div class="layui-form-item">
+                        <label for="L_email" class="layui-form-label">
+                            <span class="x-red">*</span>是否展示首页</label>
+                        <div class="layui-input-inline">
+                            <select id="showTop" name="showTop" class="valid" lay-verify="showTop">
+                            	<option value=""></option>
+                                <option value="0">不展示</option>
+                                <option value="1">展示</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label for="L_repass" class="layui-form-label"></label>
+                        <button class="layui-btn" lay-filter="add" lay-submit="" id="buttOper">保存</button></div>
+                </form>
+            </div>
+        </div>          
+                      
     </body>
     <script type="text/html" id="barDemo">
-        <a title="编辑"  onclick="editOpen(this)" href="javascript:;" lay-event="edit">
+        <a title="编辑" href="javascript:;" onclick="editOpen(this)" lay-event="edit">
             <i class="layui-icon">&#xe642;</i>
           </a>
           

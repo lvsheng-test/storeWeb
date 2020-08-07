@@ -1,5 +1,5 @@
 var URL_LOCAL='http://127.0.0.1:8088';//开发环境
-// var URL_LOCAL='http://127.0.0.1:8088';//测试环境
+//var URL_LOCAL='http://118.89.202.106:8088';//测试环境
 //var URL_LOCAL='http://127.0.0.1:8088';//生产环境
 
 ;!function (win) {

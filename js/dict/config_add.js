@@ -24,7 +24,7 @@ $(function(){
                 form.on('submit(add)',function(data) {
                     console.log(data.field);
                     $.ajax({
-				        url:URL+'/dict/insertConfigProportion',
+				        url:URL_LOCAL+'/dict/insertConfigProportion',
 				        contentType: "application/json;charset=UTF-8",
 				        type:'POST',
 				        dataType:'json',
@@ -69,7 +69,7 @@ $(function(){
 function searchConfigType(){
 	console.log('进来')
 	$.ajax({
-        url:URL+'/dict/getConfigTYpe',
+        url:URL_LOCAL+'/dict/getConfigTYpe',
         success:function(data){
             //请求成功后执行的代码
             console.log(data);

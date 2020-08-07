@@ -13,7 +13,7 @@ $(function(){
 			elem: '#test',
 			height: 500,
 			toolbar:'#toolbarDemo',
-			url: URL+'/memberCard/queryMemberCardAll',//数据接口
+			url: URL_LOCAL+'/memberCard/queryMemberCardAll',//数据接口
 				method:'post',
 				where:{memberType:memberType,dr:dr},
 				contentType: 'application/json',
@@ -62,7 +62,7 @@ $(function(){
 	                        memberType: memberType,
 	                        dr:dr
 	                    },
-	                    url: URL+'/memberCard/queryMemberCardAll',//数据接口
+	                    url: URL_LOCAL+'/memberCard/queryMemberCardAll',//数据接口
 	                    contentType: 'application/json',
 	                    method: 'post'
 	                });
@@ -92,7 +92,7 @@ $(function(){
 //根据父级编码查询字典信息
 function searchParentCode(parentCode){
 	$.ajax({
-        url:URL+'/dict/searchParentCode',
+        url:URL_LOCAL+'/dict/searchParentCode',
         contentType: "application/json;charset=UTF-8",
         type:'POST',
         dataType:'json',

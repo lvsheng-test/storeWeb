@@ -21,16 +21,19 @@ $(function(){
 				    };
 				},
 				cols: [[ //表头
-						{checkbox: true},
+						{checkbox: true,width:'4%'},
 				  		{field: 'id', title: 'ID', width:'10%',unresize:true},
-						{field: 'goodsName', title: '商品名称', width:'10%',unresize:true},
-						{field: 'goodsUrl', title: '商品主图',unresize:true,width: '10%',align:'center',templet:function(cate){
-							return "<a href='#' onclick='shopImg(\""+cate.goodsUrl+"\")'>查看</a>";
+				  		{field: 'categoryName', title: '商品类型', width:'8%',unresize:true},
+						{field: 'goodsName', title: '商品名称', width:'11%',unresize:true},
+						{field: 'goodsUrl', title: '商品主图',unresize:true,width: '8%',align:'center',templet:function(cate){
+							var str = cate.goodsUrl.split(',');
+							return "<a href='#' onclick='shopImg(\""+str[0]+"\")'>查看</a>";
 						}},
-						{field: 'goodsPrice', title: '商品单价', width:'5%',unresize:true},
-						{field: 'goodsDiscount', title: '商品优惠价', width:'5%',unresize:true},
-						{field: 'goodsNum', title: '商品库存', width:'10%',unresize:true},
-                        {field: 'goodsStatus', title: '商品状态',unresize:true,width: '10%',align:'center',templet:function(cate){
+						{field: 'goodsPrice', title: '单价(元)', width:'8%',unresize:true},
+						{field: 'goodsDiscount', title: '差价(元)', width:'8%',unresize:true},
+						{field: 'goodsNum', title: '商品库存', width:'8%',unresize:true},
+						{field: 'netContent', title: '净含量(g)', width:'8%',unresize:true},
+                        {field: 'goodsStatus', title: '商品状态',unresize:true,width: '8%',align:'center',templet:function(cate){
 							switch(cate.goodsStatus){
 								case 0:
 								return '<span>下架</span>';
@@ -40,9 +43,10 @@ $(function(){
 								return '<span>售罄</span>';
 							}
 						}},
-						{field: 'createTime', title: '创建时间', width:'10%',unresize:true},
-						{field: 'updateTime', title: '更新时间', width:'10%',unresize:true},
-						{fixed: 'right',title: '操作', width:'15%', align:'center', toolbar: '#barDemo'} //这里的toolbar值是模板元素的选择器
+						{field: 'createTime', title: '创建时间', width:'10%',unresize:true,templet:function(cate){
+				  			return ''+getSmpFormatDateByLong(cate.createTime,false)
+				  		}},
+						{fixed: 'right',title: '操作', width:'7%', align:'center', toolbar: '#barDemo'} //这里的toolbar值是模板元素的选择器
 
 			    ]]
 		});

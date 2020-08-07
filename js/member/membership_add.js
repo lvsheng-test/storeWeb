@@ -39,7 +39,7 @@ $(function(){
             console.log(data.field);
             //发异步，把数据提交给php
             $.ajax({
-		        url:URL+'/memberCard/queryCardNoAndMoblie',
+		        url:URL_LOCAL+'/memberCard/queryCardNoAndMoblie',
 		        contentType: "application/json;charset=UTF-8",
 		        type:'POST',
 		        dataType:'json',

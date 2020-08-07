@@ -11,7 +11,7 @@ $(function(){
 	    table.render({
 		    elem: '#test',
 				height: 500,
-				url: URL+'/memberCard/queryMembershipByPageList',//数据接口
+				url: URL_LOCAL+'/memberCard/queryMembershipByPageList',//数据接口
 				method:'post',
 				where:{mobile:mobile},
 				contentType: 'application/json',
@@ -70,7 +70,7 @@ $(function(){
 	                        mobile: mobile,
 	                        memberType:memberType,
 	                    },
-	                    url: URL+'/memberCard/queryMembershipByPageList',//数据接口
+	                    url: URL_LOCAL+'/memberCard/queryMembershipByPageList',//数据接口
 	                    contentType: 'application/json',
 	                    method: 'post'
 	                });
@@ -153,7 +153,7 @@ $(function(){
             console.log(data.field);
             //发异步，把数据提交给php
             $.ajax({
-		        url:URL+'/memberCard/doRecharge',
+		        url:URL_LOCAL+'/memberCard/doRecharge',
 		        contentType: "application/json;charset=UTF-8",
 		        type:'POST',
 		        dataType:'json',
@@ -195,7 +195,7 @@ $(function(){
 //获取会员卡下拉框
 function searchParentCode(parentCode){
 	$.ajax({
-        url:URL+'/dict/searchParentCode',
+        url:URL_LOCAL+'/dict/searchParentCode',
         contentType: "application/json;charset=UTF-8",
         type:'POST',
         dataType:'json',

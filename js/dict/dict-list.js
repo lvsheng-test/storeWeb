@@ -10,7 +10,7 @@ $(function(){
         sreachDictList('',1);
         //查询字典表列表
         $.ajax({
-	        url:URL+'/dict/getDictParentCode',
+	        url:URL_LOCAL+'/dict/getDictParentCode',
 	        success:function(data){
 	            //请求成功后执行的代码
 	            console.log(data);
@@ -93,7 +93,7 @@ function member_del(obj, id) {
 
 function delDictInfo(dicId){
 	$.ajax({
-        url:URL+'/dict/deleteDictInfo',
+        url:URL_LOCAL+'/dict/deleteDictInfo',
         contentType: "application/json;charset=UTF-8",
         type:'POST',
         dataType:'json',
@@ -145,10 +145,12 @@ $('tbody input').each(function(index, el) {
 
 //查询字典表列表
 function sreachDictList(parentCode,currentPage){
+
 	console.log("当前页数:"+currentPage);
+	console.log('当前请求路径:'+URL_LOCAL)
 	nowPage =currentPage;
 	$.ajax({
-	        url:URL+'/dict/queryAll',
+	        url:URL_LOCAL+'/dict/queryAll',
 	        contentType: "application/json;charset=UTF-8",
 	        type:'POST',
 	        dataType:'json',
