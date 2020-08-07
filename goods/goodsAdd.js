@@ -171,13 +171,38 @@ function saveGoods(){
 		        	categoryId:function(value){
 		        		console.log('商品类型:'+value.length);
 		            	if(value.length ==0){
-		            		return '请选择商品类型';
+		            		return '请选择商品类型！';
 		            	}
 		            },
 		            goodsName: function(value) {
 		            	console.log('商品:'+value)
 		                if(value.length == 0){
-		                	return '请填写商品名称信息';
+		                	return '请填写商品名称信息！';
+		                }
+		            },
+		            goodsPrice:function(value){
+		            	if(value.length == 0){
+		                	return '请填写商品单价信息！';
+		                }
+		            },
+		            goodsNum:function(value){
+		            	if(value.length == 0){
+		                	return '请填写库存数量,必须是整数！';
+		                }
+		            },
+		            netContent:function(value){
+		            	if(value.length == 0){
+		                	return '请填写净含量以克为单位计算！';
+		                }
+		            },
+		            saveConditions:function(value){
+		            	if(value.length == 0){
+		                	return '请填写保存条件信息！';
+		                }
+		            },
+		            shelfLife:function(value){
+		            	if(value.length == 0){
+		                	return '请填写保质期以天为单位计算！';
 		                }
 		            }
 		        });
